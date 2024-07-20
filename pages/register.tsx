@@ -10,16 +10,35 @@ export default function Register() {
     <Layout>
       <h1>Página de Cadastro de Usuário</h1>
       <form>
-        <input type="text" placeholder="Usuário" value={username}></input>
+        <input
+          type="text"
+          placeholder="Usuário"
+          value={username}
+          onChange={(event) => {
+            setUsername(event.target.value);
+          }}
+        ></input>
         <br />
-        <input type="text" placeholder="Senha" value={password}></input>
+        <input
+          type="text"
+          placeholder="Senha"
+          value={password}
+          onChange={(event) => {
+            setPassword(event.target.value);
+          }}
+        ></input>
         <br />
-        <select value={role}>
+        <select
+          value={role}
+          onChange={(event) => {
+            setRole(event.target.value);
+          }}
+        >
           <option value="salesperson">Vendedor</option>
           <option value="manager">Gerente</option>
         </select>
         <br />
-        <button type="submit">Entrar</button>
+        <button type="submit">Criar conta</button>
       </form>
     </Layout>
   );
