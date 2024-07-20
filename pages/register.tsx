@@ -12,7 +12,7 @@ export default function Register() {
       <form>
         <input
           type="text"
-          placeholder="Usuário"
+          placeholder="Nome de usuário"
           value={username}
           onChange={(event) => {
             setUsername(event.target.value);
