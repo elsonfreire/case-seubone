@@ -20,7 +20,7 @@ export default function Register() {
         ></input>
         <br />
         <input
-          type="text"
+          type="password"
           placeholder="Senha"
           value={password}
           onChange={(event) => {

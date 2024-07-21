@@ -19,11 +19,11 @@ export default function Login() {
         />
         <br />
         <input
-          type="text"
-          placeholder="Nome de usuário"
-          value={username}
+          type="password"
+          placeholder="Senha"
+          value={password}
           onChange={(event) => {
-            setUsername(event.target.value);
+            setPassword(event.target.value);
           }}
         />
         <br />
