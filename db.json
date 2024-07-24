@@ -1,18 +1,32 @@
 {
   "sales": [
     {
-      "id": "c43d",
-      "products": [],
-      "shipping": "3",
-      "delivery": "default",
-      "discount": "10"
+      "id": "ac83",
+      "products": [
+        {
+          "sku": "LQWEJRQWIOERNIG",
+          "quantity": "35"
+        },
+        {
+          "sku": "r",
+          "quantity": "20"
+        }
+      ],
+      "shipping": "15",
+      "delivery": "turbo",
+      "discount": "200"
     },
     {
-      "id": "08ed",
-      "products": [],
-      "shipping": "0",
-      "delivery": "turbo",
-      "discount": "100"
+      "id": "167e",
+      "products": [
+        {
+          "sku": "rqwerqwe",
+          "quantity": "23142134"
+        }
+      ],
+      "shipping": "200",
+      "delivery": "super",
+      "discount": "20340"
     }
   ]
 }
