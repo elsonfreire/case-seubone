@@ -1,4 +1,10 @@
-export const SKUs = [
+export const getProductBySku = (codigoSku) => {
+  SKUs.find((sku) => {
+    produto.SKU === codigoSku;
+  });
+};
+
+const SKUs = [
   {
     SKU: "TR.BD.PA.0A",
     produto: "Trucker, logo em Bordado, tecido Padrão, 0 Aplicações Extras",

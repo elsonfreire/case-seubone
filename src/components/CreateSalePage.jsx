@@ -19,7 +19,6 @@ const ProductsForm = ({ products, setProducts }) => {
     }
 
     const productObject = { sku: newProductSku, quantity: newProductQuantity };
-    console.log(productObject);
     setProducts(products.concat(productObject));
 
     setNewProductSku("");
@@ -94,9 +93,7 @@ const Layout = () => {
       discount,
     };
 
-    saleService.create(sale).then((response) => {
-      console.log(response);
-    });
+    saleService.create(sale);
 
     setProducts([]);
     setShipping("");
@@ -150,7 +147,6 @@ const Layout = () => {
             id="discount"
           />
         </div>
-
         <button type="submit">Criar venda</button>
       </form>
     </>

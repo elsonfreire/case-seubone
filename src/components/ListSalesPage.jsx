@@ -1,7 +1,15 @@
 import { useEffect, useState } from "react";
 import saleService from "../services/sales";
+import "../index.css";
 
-const Sale = ({ sale }) => {
+const Sale = ({ sale, handleDeleteSale }) => {
+  const saleStyle = {
+    border: "solid 1px",
+    padding: "30px",
+    margin: "5px",
+    width: "24%",
+  };
+
   const getProductsListItems = () => {
     return sale.products.map((product) => {
       return (
@@ -13,7 +21,7 @@ const Sale = ({ sale }) => {
   };
 
   return (
-    <>
+    <div style={saleStyle}>
       <h3>ID: {sale.id}</h3>
       <ul>
         <li>
@@ -23,18 +31,37 @@ const Sale = ({ sale }) => {
         <li>Prazo: {sale.delivery}</li>
         <li>Desconto: {sale.discount}</li>
       </ul>
-    </>
+      <h3>Valor total: {saleService.calculateTotalPrice(sale)}</h3>
+      <button onClick={handleDeleteSale}>Excluir venda</button>
+    </div>
   );
 };
 
-const SalesList = ({ sales }) => {
+const SalesList = ({ sales, handleDeleteSale }) => {
+  const salesStyle = {
+    display: "flex",
+    flexWrap: "wrap",
+  };
+
   const getSales = () => {
     return sales.map((sale) => {
-      return <Sale sale={sale}></Sale>;
+      return (
+        <Sale
+          key={sale.id}
+          sale={sale}
+          handleDeleteSale={() => {
+            handleDeleteSale(sale.id);
+          }}
+        />
+      );
     });
   };
 
-  return <div>{getSales()}</div>;
+  return (
+    <div style={salesStyle}>
+      {sales.length > 0 ? getSales() : <p>Nenhum produto foi adicionado</p>}
+    </div>
+  );
 };
 
 const Layout = () => {
@@ -46,10 +73,24 @@ const Layout = () => {
     });
   }, []);
 
+  const handleDeleteSale = (id) => {
+    if (!window.confirm(`Deseja mesmo excluir o pedido de ID ${id}?`)) {
+      return;
+    }
+
+    saleService.remove(id).then((response) => {
+      setSales(
+        sales.filter((sale) => {
+          return sale.id !== response.id;
+        })
+      );
+    });
+  };
+
   return (
     <>
       <h1>Vendas </h1>
-      <SalesList sales={sales} />
+      <SalesList sales={sales} handleDeleteSale={handleDeleteSale} />
     </>
   );
 };
