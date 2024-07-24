@@ -25,12 +25,35 @@ const remove = (id) => {
   });
 };
 
-const calculateTotalPrice = (sale) => {
+const calculateProductsSum = (products) => {
   let productsSum = 0;
-  sale.products.forEach((product) => {
+
+  products.forEach((product) => {
     const productPrice = productsService.getProductPriceBySku(product.sku);
     productsSum += productPrice * Number(product.quantity);
   });
+
+  return productsSum;
+};
+
+const calculateMaxDiscount = (sale) => {
+  const productsSum = calculateProductsSum(sale.products);
+
+  let percentage = 0;
+  if (sale.delivery === "default") {
+    percentage = 0.05;
+  } else if (sale.delivery === "turbo") {
+    percentage = 0.1;
+  } else if (sale.delivery === "super") {
+    percentage = 0.2;
+  }
+
+  const maxDiscount = Math.max(sale.shipping, percentage * productsSum);
+  return maxDiscount;
+};
+
+const calculateTotalPrice = (sale) => {
+  const productsSum = calculateProductsSum(sale.products);
 
   let deliveryAdditional = 0;
   if (sale.delivery === "turbo") {
@@ -54,4 +77,5 @@ export default {
   update,
   remove,
   calculateTotalPrice,
+  calculateMaxDiscount,
 };

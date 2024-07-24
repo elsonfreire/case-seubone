@@ -31,7 +31,7 @@ const Sale = ({ sale, handleDeleteSale }) => {
         <li>Prazo: {sale.delivery}</li>
         <li>Desconto: {sale.discount}</li>
       </ul>
-      <h3>Valor total: {saleService.calculateTotalPrice(sale)}</h3>
+      <h3>Valor total: R$ {saleService.calculateTotalPrice(sale)}</h3>
       <button onClick={handleDeleteSale}>Excluir venda</button>
     </div>
   );

@@ -176,7 +176,7 @@ const Layout = () => {
             id="discount"
           />
         </div>
-        <h3>Valor: {saleValue}</h3>
+        <h3>Valor total: R$ {saleValue}</h3>
         <button type="submit">Criar venda</button>
       </form>
     </>
