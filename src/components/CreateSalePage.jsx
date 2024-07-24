@@ -1,12 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import saleService from "../services/sales";
+import productsService from "../services/products";
 
 const ProductsForm = ({ products, setProducts }) => {
   const [newProductSku, setNewProductSku] = useState("");
   const [newProductQuantity, setNewProductQuantity] = useState("");
+  const [newProductDescription, setNewProductDescription] = useState("");
 
   const addProduct = (event) => {
     event.preventDefault();
+
+    if (!productsService.getProductBySku(newProductSku)) {
+      alert("Não existe produto com esse SKU");
+      return;
+    }
 
     if (
       products &&
@@ -33,6 +40,16 @@ const ProductsForm = ({ products, setProducts }) => {
     setNewProductSku(event.target.value);
   };
 
+  useEffect(() => {
+    const product = productsService.getProductBySku(newProductSku);
+
+    if (!product) {
+      setNewProductDescription("Não existe produto com esse SKU");
+      return;
+    }
+    setNewProductDescription(product.produto);
+  }, [newProductSku]);
+
   return (
     <>
       <h3>Produtos:</h3>
@@ -42,6 +59,7 @@ const ProductsForm = ({ products, setProducts }) => {
           onChange={handleProductSkuChange}
           placeholder="SKU"
         />
+        <p>{newProductDescription}</p>
         <input
           value={newProductQuantity}
           onChange={handleProductQuantityChange}
@@ -58,7 +76,7 @@ const Products = ({ products }) => {
     return products.map((product) => {
       return (
         <li key={product.sku}>
-          {product.sku} {product.quantity}
+          SKU: {product.sku} QTD: {product.quantity}
         </li>
       );
     });
@@ -82,16 +100,22 @@ const Layout = () => {
   const [shipping, setShipping] = useState("");
   const [delivery, setDelivery] = useState("default");
   const [discount, setDiscount] = useState("");
+  const [saleValue, setSaleValue] = useState(0);
 
-  const createSale = (event) => {
-    event.preventDefault();
-
+  const getSaleObject = () => {
     const sale = {
       products,
       shipping,
       delivery,
       discount,
     };
+    return sale;
+  };
+
+  const createSale = (event) => {
+    event.preventDefault();
+
+    const sale = getSaleObject();
 
     saleService.create(sale);
 
@@ -100,6 +124,11 @@ const Layout = () => {
     setDelivery("default");
     setDiscount("");
   };
+
+  useEffect(() => {
+    const sale = getSaleObject();
+    setSaleValue(saleService.calculateTotalPrice(sale));
+  }, [products, shipping, delivery, discount]);
 
   const handleShippingChange = (event) => {
     setShipping(event.target.value);
@@ -147,6 +176,7 @@ const Layout = () => {
             id="discount"
           />
         </div>
+        <h3>Valor: {saleValue}</h3>
         <button type="submit">Criar venda</button>
       </form>
     </>

@@ -1,4 +1,5 @@
 import axios from "axios";
+import productsService from "./products";
 
 const baseUrl = "http://localhost:3001/sales";
 
@@ -25,12 +26,24 @@ const remove = (id) => {
 };
 
 const calculateTotalPrice = (sale) => {
-  let total = 0;
+  let productsSum = 0;
   sale.products.forEach((product) => {
-    console.log(product);
-    const productPrice = 1; //pegar do arquivo products.js
-    total += productPrice * product.quantity;
+    const productPrice = productsService.getProductPriceBySku(product.sku);
+    productsSum += productPrice * Number(product.quantity);
   });
+
+  let deliveryAdditional = 0;
+  if (sale.delivery === "turbo") {
+    deliveryAdditional = productsSum * 0.1;
+  } else if (sale.delivery === "super") {
+    deliveryAdditional = productsSum * 0.2;
+  }
+
+  const total =
+    productsSum +
+    Number(sale.shipping) +
+    deliveryAdditional -
+    Number(sale.discount);
 
   return total;
 };

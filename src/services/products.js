@@ -1,7 +1,23 @@
 export const getProductBySku = (codigoSku) => {
-  SKUs.find((sku) => {
-    produto.SKU === codigoSku;
+  const product = SKUs.find((sku) => {
+    return sku.SKU === codigoSku;
   });
+
+  if (product) {
+    return product;
+  } else {
+    return null;
+  }
+};
+
+const getProductPriceBySku = (codigoSku) => {
+  const product = getProductBySku(codigoSku);
+  return product.preco_cheio;
+};
+
+export default {
+  getProductBySku,
+  getProductPriceBySku,
 };
 
 const SKUs = [

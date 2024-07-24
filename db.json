@@ -1,3 +1,16 @@
 {
-  "sales": []
+  "sales": [
+    {
+      "id": "0282",
+      "products": [
+        {
+          "sku": "TR.BD.PA.0A",
+          "quantity": "30"
+        }
+      ],
+      "shipping": "150",
+      "delivery": "default",
+      "discount": "100"
+    }
+  ]
 }
