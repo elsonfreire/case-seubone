@@ -1,3 +1,18 @@
 {
-  "sales": []
+  "sales": [
+    {
+      "id": "c43d",
+      "products": [],
+      "shipping": "3",
+      "delivery": "default",
+      "discount": "10"
+    },
+    {
+      "id": "08ed",
+      "products": [],
+      "shipping": "0",
+      "delivery": "turbo",
+      "discount": "100"
+    }
+  ]
 }

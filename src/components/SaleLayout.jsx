@@ -1,4 +1,6 @@
-import { useState, useTransition } from "react";
+import axios from "axios";
+import { useState } from "react";
+import saleService from "../services/sales";
 
 const ProductsForm = ({ products, setProducts }) => {
   const [newProductSku, setNewProductSku] = useState("");
@@ -86,9 +88,6 @@ const Layout = () => {
   const createSale = (event) => {
     event.preventDefault();
 
-    if (products) {
-    }
-
     const sale = {
       products,
       shipping,
@@ -96,7 +95,9 @@ const Layout = () => {
       discount,
     };
 
-    console.log(sale);
+    saleService.create(sale).then((response) => {
+      console.log(response);
+    });
 
     setProducts([]);
     setShipping("");
