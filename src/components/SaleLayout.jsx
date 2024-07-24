@@ -1,11 +1,21 @@
 import { useState, useTransition } from "react";
 
-const Form = ({ products, setProducts }) => {
+const ProductsForm = ({ products, setProducts }) => {
   const [newProductSku, setNewProductSku] = useState("");
   const [newProductQuantity, setNewProductQuantity] = useState("");
 
   const addProduct = (event) => {
     event.preventDefault();
+
+    if (
+      products &&
+      products.some((product) => {
+        return product.sku === newProductSku;
+      })
+    ) {
+      alert("SKU repetido");
+      return;
+    }
 
     const productObject = { sku: newProductSku, quantity: newProductQuantity };
     console.log(productObject);
@@ -24,19 +34,22 @@ const Form = ({ products, setProducts }) => {
   };
 
   return (
-    <form onSubmit={addProduct}>
-      <input
-        value={newProductSku}
-        onChange={handleProductSkuChange}
-        placeholder="SKU"
-      />
-      <input
-        value={newProductQuantity}
-        onChange={handleProductQuantityChange}
-        placeholder="Quantidade"
-      />
-      <button type="submit">add</button>
-    </form>
+    <>
+      <h3>Produtos:</h3>
+      <form onSubmit={addProduct}>
+        <input
+          value={newProductSku}
+          onChange={handleProductSkuChange}
+          placeholder="SKU"
+        />
+        <input
+          value={newProductQuantity}
+          onChange={handleProductQuantityChange}
+          placeholder="Quantidade"
+        />
+        <button type="submit">Add</button>
+      </form>
+    </>
   );
 };
 
@@ -51,22 +64,95 @@ const Products = ({ products }) => {
     });
   };
 
-  return <ul>{getProductsListItems()}</ul>;
+  return (
+    <>
+      <ul>
+        {products.length > 0 ? (
+          getProductsListItems()
+        ) : (
+          <p>Nenhum produto foi adicionado</p>
+        )}
+      </ul>
+    </>
+  );
 };
 
 const Layout = () => {
-  const [products, setProducts] = useState([
-    {
-      sku: "TR.BD.PA.2A",
-      quantity: 30,
-    },
-  ]);
+  const [products, setProducts] = useState([]);
+  const [shipping, setShipping] = useState("");
+  const [delivery, setDelivery] = useState("default");
+  const [discount, setDiscount] = useState("");
+
+  const createSale = (event) => {
+    event.preventDefault();
+
+    if (products) {
+    }
+
+    const sale = {
+      products,
+      shipping,
+      delivery,
+      discount,
+    };
+
+    console.log(sale);
+
+    setProducts([]);
+    setShipping("");
+    setDelivery("default");
+    setDiscount("");
+  };
+
+  const handleShippingChange = (event) => {
+    setShipping(event.target.value);
+  };
+
+  const handleDeliveryChange = (event) => {
+    setDelivery(event.target.value);
+  };
+
+  const handleDiscountChange = (event) => {
+    setDiscount(event.target.value);
+  };
 
   return (
     <>
       <h1>Criar venda</h1>
-      <Form products={products} setProducts={setProducts} />
+      <ProductsForm products={products} setProducts={setProducts} />
       <Products products={products} />
+      <form onSubmit={createSale}>
+        <div>
+          <label htmlFor="shipping">Frete: </label>
+          <input
+            value={shipping}
+            onChange={handleShippingChange}
+            id="shipping"
+          />
+        </div>
+        <div>
+          <label htmlFor="delivery">Prazo: </label>
+          <select
+            value={delivery}
+            onChange={handleDeliveryChange}
+            id="delivery"
+          >
+            <option value="default">Padrão</option>
+            <option value="turbo">Turbo</option>
+            <option value="super">Super Turbo</option>
+          </select>
+        </div>
+        <div>
+          <label htmlFor="discount">Desconto: </label>
+          <input
+            value={discount}
+            onChange={handleDiscountChange}
+            id="discount"
+          />
+        </div>
+
+        <button type="submit">Criar venda</button>
+      </form>
     </>
   );
 };
