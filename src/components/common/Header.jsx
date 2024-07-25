@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import logo from "../../assets/images/logo.png";
 
 const Navbar = () => {
   const navbarStyle = {
@@ -30,13 +31,21 @@ const Header = () => {
     margin: "0px",
     padding: "10px",
     paddingLeft: "30px",
-    backgroundColor: "#E4E4E4",
+    backgroundColor: "#2596be",
+    display: "flex",
+    alignItems: "center",
+  };
+
+  const logoStyle = {
+    height: "60px", // Ajuste o tamanho do logo conforme necessário
+    marginRight: "20px", // Espaço entre o logo e o título
   };
 
   return (
     <>
       <header style={headerStyle}>
-        <h1>Sistema de gerenciamento de vendas - SeuBoné</h1>
+        <img src={logo} alt="Logo" style={logoStyle} />
+        <h1 style={{ color: "white" }}>Sistema de gerenciamento de vendas</h1>
       </header>
       <Navbar />
     </>
