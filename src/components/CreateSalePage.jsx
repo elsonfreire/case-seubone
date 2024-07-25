@@ -115,23 +115,39 @@ const Layout = () => {
     return sale;
   };
 
+  const validateProducts = () => {
+    if (!products || products.length === 0) {
+      alert("Adicione algum produto");
+      return false;
+    }
+    return true;
+  };
+
+  const validateDiscount = () => {
+    const sale = getSaleObject();
+    const maxDiscount = calculateMaxDiscount(sale);
+    if (sale.discount > maxDiscount) {
+      alert("Desconto excedeu o permitido. Solicitação de venda foi enviada");
+      return false;
+    }
+    return true;
+  };
+
   const createSale = (event) => {
     event.preventDefault();
 
+    console.log(products);
+
+    if (!validateProducts()) {
+      return;
+    }
+
     const sale = getSaleObject();
 
-    const maxDiscount = calculateMaxDiscount(sale);
-    if (sale.discount > maxDiscount) {
-      console.log(
-        `desconto ${sale.discount} grande demais. maximo = ${maxDiscount}`
-      );
-
+    if (!validateDiscount()) {
       requestsServices.create(sale).then((response) => {
         console.log(response);
       });
-
-      alert("Desconto excedeu o permitido. Solicitação de venda foi enviada");
-      return;
     }
 
     salesServices.create(sale);
@@ -180,6 +196,7 @@ const Layout = () => {
                   value={shipping}
                   onChange={handleShippingChange}
                   id="shipping"
+                  required
                 />
               </td>
             </tr>
@@ -192,6 +209,7 @@ const Layout = () => {
                   value={delivery}
                   onChange={handleDeliveryChange}
                   id="delivery"
+                  required
                 >
                   <option value="default">Padrão</option>
                   <option value="turbo">Turbo</option>
@@ -208,6 +226,7 @@ const Layout = () => {
                   value={discount}
                   onChange={handleDiscountChange}
                   id="discount"
+                  required
                 />
               </td>
             </tr>

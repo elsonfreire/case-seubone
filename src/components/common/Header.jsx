@@ -45,7 +45,10 @@ const Header = () => {
     <>
       <header style={headerStyle}>
         <img src={logo} alt="Logo" style={logoStyle} />
-        <h1 style={{ color: "white" }}>Sistema de gerenciamento de vendas</h1>
+        <h1 style={{ color: "white" }}>
+          {" "}
+          - Sistema de gerenciamento de vendas
+        </h1>
       </header>
       <Navbar />
     </>

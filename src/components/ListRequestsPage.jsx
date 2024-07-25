@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { salesServices, requestsServices } from "../services/sales";
 import ItemList from "../components/common/ItemList";
-import { calculateTotalPrice } from "../util/calculations";
 
 const RequestsPage = () => {
   const [requests, setRequests] = useState([]);
@@ -18,14 +17,13 @@ const RequestsPage = () => {
     }
 
     const approvedSale = requests.find((request) => {
+      console.log(request);
       return request.id === id;
     });
 
-    console.log(
-      `Deveria ser aprovado request de valor ${calculateTotalPrice(
-        approvedSale
-      )}`
-    );
+    const { id: requestId, ...approvedSaleWithoutId } = approvedSale;
+
+    salesServices.create(approvedSaleWithoutId);
   };
 
   const handleDeleteRequest = (id) => {
