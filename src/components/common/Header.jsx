@@ -22,6 +22,9 @@ const Navbar = () => {
       <li>
         <Link to="/requests">Solicitações</Link>
       </li>
+      <li>
+        <Link to="/login">Login</Link>
+      </li>
     </ul>
   );
 };

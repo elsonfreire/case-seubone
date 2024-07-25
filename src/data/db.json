@@ -63,6 +63,22 @@
       "shipping": "norte",
       "delivery": "turbo",
       "discount": 1000
+    },
+    {
+      "id": "c150",
+      "products": [
+        {
+          "sku": "TR.BD.PR.6A",
+          "quantity": 300
+        },
+        {
+          "sku": "TR.BD.PA.0A",
+          "quantity": 150
+        }
+      ],
+      "shipping": "centrooeste",
+      "delivery": "super",
+      "discount": 200
     }
   ],
   "requests": []

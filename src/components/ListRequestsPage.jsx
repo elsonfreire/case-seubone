@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { salesServices, requestsServices } from "../services/sales";
 import ItemList from "../components/common/ItemList";
 
-const RequestsPage = () => {
+const Layout = () => {
   const [requests, setRequests] = useState([]);
 
   useEffect(() => {
@@ -64,4 +64,4 @@ const RequestsPage = () => {
   );
 };
 
-export default RequestsPage;
+export default Layout;
