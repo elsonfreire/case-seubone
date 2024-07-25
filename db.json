@@ -1,16 +1,4 @@
 {
-  "sales": [
-    {
-      "id": "b32e",
-      "products": [
-        {
-          "sku": "TR.BD.PA.0A",
-          "quantity": "300"
-        }
-      ],
-      "shipping": "200",
-      "delivery": "turbo",
-      "discount": "50.50"
-    }
-  ]
+  "sales": [],
+  "request": []
 }

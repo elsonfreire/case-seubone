@@ -117,6 +117,13 @@ const Layout = () => {
 
     const sale = getSaleObject();
 
+    const maxDiscount = saleService.calculateMaxDiscount(sale);
+    if (sale.discount > maxDiscount) {
+      console.log(
+        `desconto ${sale.discount} grande demais. maximo = ${maxDiscount}`
+      );
+    }
+
     saleService.create(sale);
 
     setProducts([]);
