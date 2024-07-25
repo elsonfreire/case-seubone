@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { salesServices } from "../services/sales";
+import { requestsServices, salesServices } from "../services/sales";
 import {
   calculateMaxDiscount,
   calculateTotalPrice,
@@ -15,7 +15,7 @@ const ProductsForm = ({ products, setProducts }) => {
     event.preventDefault();
 
     if (!productsService.getProductBySku(newProductSku)) {
-      alert("Não existe produto com esse SKU");
+      alert("Esse SKU não existe");
       return;
     }
 
@@ -25,7 +25,7 @@ const ProductsForm = ({ products, setProducts }) => {
         return product.sku === newProductSku;
       })
     ) {
-      alert("SKU repetido");
+      alert("Esse SKU já foi adicionado");
       return;
     }
 
@@ -48,7 +48,7 @@ const ProductsForm = ({ products, setProducts }) => {
     const product = productsService.getProductBySku(newProductSku);
 
     if (!product) {
-      setNewProductDescription("Não existe produto com esse SKU");
+      setNewProductDescription("Esse SKU não existe");
       return;
     }
     setNewProductDescription(product.produto);
@@ -56,7 +56,6 @@ const ProductsForm = ({ products, setProducts }) => {
 
   return (
     <>
-      <h3>Produtos:</h3>
       <form onSubmit={addProduct}>
         <input
           value={newProductSku}
@@ -127,9 +126,11 @@ const Layout = () => {
         `desconto ${sale.discount} grande demais. maximo = ${maxDiscount}`
       );
 
-      alert(
-        "Desconto excedeu o permitido. Solicitação de venda criada com sucesso."
-      );
+      requestsServices.create(sale).then((response) => {
+        console.log(response);
+      });
+
+      alert("Desconto excedeu o permitido. Solicitação de venda foi enviada");
       return;
     }
 
@@ -163,37 +164,55 @@ const Layout = () => {
   return (
     <>
       <h1>Criar venda</h1>
+      <h3>Produtos:</h3>
       <ProductsForm products={products} setProducts={setProducts} />
       <Products products={products} />
+      <h3>Detalhes:</h3>
       <form onSubmit={createSale}>
-        <div>
-          <label htmlFor="shipping">Frete: </label>
-          <input
-            value={shipping}
-            onChange={handleShippingChange}
-            id="shipping"
-          />
-        </div>
-        <div>
-          <label htmlFor="delivery">Prazo: </label>
-          <select
-            value={delivery}
-            onChange={handleDeliveryChange}
-            id="delivery"
-          >
-            <option value="default">Padrão</option>
-            <option value="turbo">Turbo</option>
-            <option value="super">Super Turbo</option>
-          </select>
-        </div>
-        <div>
-          <label htmlFor="discount">Desconto: </label>
-          <input
-            value={discount}
-            onChange={handleDiscountChange}
-            id="discount"
-          />
-        </div>
+        <table>
+          <tbody>
+            <tr>
+              <td>
+                <label htmlFor="shipping">Frete: </label>
+              </td>
+              <td>
+                <input
+                  value={shipping}
+                  onChange={handleShippingChange}
+                  id="shipping"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label htmlFor="delivery">Prazo: </label>
+              </td>
+              <td>
+                <select
+                  value={delivery}
+                  onChange={handleDeliveryChange}
+                  id="delivery"
+                >
+                  <option value="default">Padrão</option>
+                  <option value="turbo">Turbo</option>
+                  <option value="super">Super Turbo</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label htmlFor="discount">Desconto: </label>
+              </td>
+              <td>
+                <input
+                  value={discount}
+                  onChange={handleDiscountChange}
+                  id="discount"
+                />
+              </td>
+            </tr>
+          </tbody>
+        </table>
         <h3>Valor total: R$ {saleValue}</h3>
         <button type="submit">Criar venda</button>
       </form>
