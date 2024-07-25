@@ -1,48 +1,17 @@
 import { useEffect, useState } from "react";
-import saleService from "../services/sales";
-import "../index.css";
+import { salesServices } from "../services/sales";
+import SaleInfo from "./SaleInfo";
 
 const Sale = ({ sale, handleDeleteSale }) => {
-  const saleStyle = {
-    border: "solid 1px",
-    padding: "30px",
-    margin: "5px",
-    width: "24%",
-  };
-
-  const getProductsListItems = () => {
-    return sale.products.map((product) => {
-      return (
-        <li key={product.sku}>
-          SKU: {product.sku} QTD: {product.quantity}
-        </li>
-      );
-    });
-  };
-
   return (
-    <div style={saleStyle}>
-      <h3>ID: {sale.id}</h3>
-      <ul>
-        <li>
-          Produtos: <ul>{getProductsListItems()}</ul>
-        </li>
-        <li>Frete: {sale.shipping}</li>
-        <li>Prazo: {sale.delivery}</li>
-        <li>Desconto: {sale.discount}</li>
-      </ul>
-      <h3>Valor total: R$ {saleService.calculateTotalPrice(sale)}</h3>
+    <div className="sale-item">
+      <SaleInfo sale={sale} />
       <button onClick={handleDeleteSale}>Excluir venda</button>
     </div>
   );
 };
 
 const SalesList = ({ sales, handleDeleteSale }) => {
-  const salesStyle = {
-    display: "flex",
-    flexWrap: "wrap",
-  };
-
   const getSales = () => {
     return sales.map((sale) => {
       return (
@@ -58,7 +27,7 @@ const SalesList = ({ sales, handleDeleteSale }) => {
   };
 
   return (
-    <div style={salesStyle}>
+    <div className="sale-list">
       {sales.length > 0 ? getSales() : <p>Nenhum produto foi adicionado</p>}
     </div>
   );
@@ -68,7 +37,7 @@ const Layout = () => {
   const [sales, setSales] = useState([]);
 
   useEffect(() => {
-    saleService.getAll().then((response) => {
+    salesServices.getAll().then((response) => {
       setSales(response);
     });
   }, []);
@@ -78,7 +47,7 @@ const Layout = () => {
       return;
     }
 
-    saleService.remove(id).then((response) => {
+    salesServices.remove(id).then((response) => {
       setSales(
         sales.filter((sale) => {
           return sale.id !== response.id;

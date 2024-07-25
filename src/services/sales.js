@@ -1,28 +1,37 @@
 import axios from "axios";
 import productsService from "./products";
 
-const baseUrl = "http://localhost:3001/sales";
+const salesUrl = "http://localhost:3001/sales";
+const requestsUrl = "http://localhost:3001/requests";
 
-const getAll = () => {
-  const request = axios.get(baseUrl);
-  return request.then((response) => response.data);
-};
+const createService = (baseUrl) => {
+  const getAll = () => {
+    const request = axios.get(baseUrl);
+    return request.then((response) => response.data);
+  };
 
-const create = (newObject) => {
-  const request = axios.post(baseUrl, newObject);
-  return request.then((response) => response.data);
-};
+  const create = (newObject) => {
+    const request = axios.post(baseUrl, newObject);
+    return request.then((response) => response.data);
+  };
 
-const update = (id, newObject) => {
-  const request = axios.put(`${baseUrl}/${id}`, newObject);
-  return request.then((response) => response.data);
-};
+  const update = (id, newObject) => {
+    const request = axios.put(`${baseUrl}/${id}`, newObject);
+    return request.then((response) => response.data);
+  };
 
-const remove = (id) => {
-  const request = axios.delete(`${baseUrl}/${id}`);
-  return request.then((response) => {
-    return response.data;
-  });
+  const remove = (id) => {
+    const request = axios.delete(`${baseUrl}/${id}`);
+    return request.then((response) => {
+      return response.data;
+    });
+  };
+  return {
+    getAll,
+    create,
+    update,
+    remove,
+  };
 };
 
 const calculateProductsSum = (products) => {
@@ -39,14 +48,13 @@ const calculateProductsSum = (products) => {
 const calculateMaxDiscount = (sale) => {
   const productsSum = calculateProductsSum(sale.products);
 
-  let percentage = 0;
-  if (sale.delivery === "default") {
-    percentage = 0.05;
-  } else if (sale.delivery === "turbo") {
-    percentage = 0.1;
-  } else if (sale.delivery === "super") {
-    percentage = 0.2;
-  }
+  const percentageMap = {
+    default: 0.05,
+    turbo: 0.1,
+    super: 0.2,
+  };
+
+  const percentage = percentageMap[sale.delivery];
 
   const maxDiscount = Math.max(sale.shipping, percentage * productsSum);
   return maxDiscount;
@@ -55,12 +63,13 @@ const calculateMaxDiscount = (sale) => {
 const calculateTotalPrice = (sale) => {
   const productsSum = calculateProductsSum(sale.products);
 
-  let deliveryAdditional = 0;
-  if (sale.delivery === "turbo") {
-    deliveryAdditional = productsSum * 0.1;
-  } else if (sale.delivery === "super") {
-    deliveryAdditional = productsSum * 0.2;
-  }
+  const additionalMap = {
+    default: 0,
+    turbo: 0.1,
+    super: 0.2,
+  };
+  const additionalPercentage = additionalMap[sale.delivery];
+  const deliveryAdditional = productsSum * additionalPercentage;
 
   const total =
     productsSum +
@@ -71,11 +80,12 @@ const calculateTotalPrice = (sale) => {
   return total;
 };
 
-export default {
-  getAll,
-  create,
-  update,
-  remove,
+const salesServices = createService(salesUrl);
+const requestsServices = createService(requestsUrl);
+
+export {
+  salesServices,
+  requestsServices,
   calculateTotalPrice,
   calculateMaxDiscount,
 };

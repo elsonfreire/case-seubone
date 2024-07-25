@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
-import saleService from "../services/sales";
+import {
+  salesServices,
+  calculateMaxDiscount,
+  calculateTotalPrice,
+} from "../services/sales";
 import productsService from "../services/products";
 
 const ProductsForm = ({ products, setProducts }) => {
@@ -117,14 +121,16 @@ const Layout = () => {
 
     const sale = getSaleObject();
 
-    const maxDiscount = saleService.calculateMaxDiscount(sale);
+    const maxDiscount = calculateMaxDiscount(sale);
     if (sale.discount > maxDiscount) {
       console.log(
         `desconto ${sale.discount} grande demais. maximo = ${maxDiscount}`
       );
+
+      //
     }
 
-    saleService.create(sale);
+    salesServices.create(sale);
 
     setProducts([]);
     setShipping("");
@@ -134,7 +140,7 @@ const Layout = () => {
 
   useEffect(() => {
     const sale = getSaleObject();
-    setSaleValue(saleService.calculateTotalPrice(sale));
+    setSaleValue(calculateTotalPrice(sale));
   }, [products, shipping, delivery, discount]);
 
   const handleShippingChange = (event) => {
