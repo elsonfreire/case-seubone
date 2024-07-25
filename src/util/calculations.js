@@ -63,10 +63,10 @@ const calculateShipping = (sale) => {
   const region = sale.shipping;
 
   const regionFactor = {
-    n: 10,
-    ne: 0,
-    co: 15,
-    se: 20,
+    norte: 10,
+    nordeste: 0,
+    centrooeste: 15,
+    sudeste: 20,
     s: 30,
   };
 

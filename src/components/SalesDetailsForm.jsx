@@ -6,7 +6,7 @@ import {
 import { requestsServices, salesServices } from "../services/sales";
 
 const SaleDetailsForm = ({ products, setProducts }) => {
-  const [shipping, setShipping] = useState("ne");
+  const [shipping, setShipping] = useState("nordeste");
   const [delivery, setDelivery] = useState("default");
   const [discount, setDiscount] = useState("");
   const [saleValue, setSaleValue] = useState("");
@@ -61,7 +61,7 @@ const SaleDetailsForm = ({ products, setProducts }) => {
     salesServices.create(sale);
 
     setProducts([]);
-    setShipping("ne");
+    setShipping("nordeste");
     setDelivery("default");
     setDiscount("");
 
@@ -99,11 +99,11 @@ const SaleDetailsForm = ({ products, setProducts }) => {
                 onChange={handleShippingChange}
                 id="shipping"
               >
-                <option value="ne">Nordeste</option>
-                <option value="n">Norte</option>
-                <option value="co">Centro-Oeste</option>
-                <option value="s">Sul</option>
-                <option value="se">Sudeste</option>
+                <option value="nordeste">Nordeste</option>
+                <option value="norte">Norte</option>
+                <option value="centrooeste">Centro-Oeste</option>
+                <option value="sul">Sul</option>
+                <option value="sudeste">Sudeste</option>
               </select>
             </td>
           </tr>

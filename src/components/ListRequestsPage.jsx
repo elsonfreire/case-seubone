@@ -23,6 +23,14 @@ const RequestsPage = () => {
     const { id: requestId, ...approvedSaleWithoutId } = approvedSale;
 
     salesServices.create(approvedSaleWithoutId);
+
+    requestsServices.remove(id);
+
+    setRequests(
+      requests.filter((request) => {
+        return request.id !== id;
+      })
+    );
   };
 
   const handleDeleteRequest = (id) => {
