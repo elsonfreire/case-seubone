@@ -1,4 +1,4 @@
-import { calculateTotalPrice } from "../services/sales";
+import { calculateTotalPrice } from "../util/calculations";
 
 const SaleInfo = ({ sale }) => {
   const getProductsListItems = () => {

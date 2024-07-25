@@ -1,5 +1,4 @@
 import axios from "axios";
-import productsService from "./products";
 
 const salesUrl = "http://localhost:3001/sales";
 const requestsUrl = "http://localhost:3001/requests";
@@ -45,47 +44,7 @@ const calculateProductsSum = (products) => {
   return productsSum;
 };
 
-const calculateMaxDiscount = (sale) => {
-  const productsSum = calculateProductsSum(sale.products);
-
-  const percentageMap = {
-    default: 0.05,
-    turbo: 0.1,
-    super: 0.2,
-  };
-
-  const percentage = percentageMap[sale.delivery];
-
-  const maxDiscount = Math.max(sale.shipping, percentage * productsSum);
-  return maxDiscount;
-};
-
-const calculateTotalPrice = (sale) => {
-  const productsSum = calculateProductsSum(sale.products);
-
-  const additionalMap = {
-    default: 0,
-    turbo: 0.1,
-    super: 0.2,
-  };
-  const additionalPercentage = additionalMap[sale.delivery];
-  const deliveryAdditional = productsSum * additionalPercentage;
-
-  const total =
-    productsSum +
-    Number(sale.shipping) +
-    deliveryAdditional -
-    Number(sale.discount);
-
-  return total;
-};
-
 const salesServices = createService(salesUrl);
 const requestsServices = createService(requestsUrl);
 
-export {
-  salesServices,
-  requestsServices,
-  calculateTotalPrice,
-  calculateMaxDiscount,
-};
+export { salesServices, requestsServices };

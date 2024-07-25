@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
+import { salesServices } from "../services/sales";
 import {
-  salesServices,
   calculateMaxDiscount,
   calculateTotalPrice,
-} from "../services/sales";
+} from "../util/calculations";
 import productsService from "../services/products";
 
 const ProductsForm = ({ products, setProducts }) => {
