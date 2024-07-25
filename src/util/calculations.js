@@ -46,4 +46,18 @@ const calculateTotalPrice = (sale) => {
   return total;
 };
 
+const calculateShipping = (region) => {
+  const regionFactor = {
+    n: 10,
+    ne: 0,
+    co: 15,
+    se: 20,
+    s: 30,
+  };
+
+  const productsQuantity = 0;
+  //pegar  a qtdd
+  return regionFactor[region] * productsQuantity;
+};
+
 export { calculateMaxDiscount, calculateTotalPrice };

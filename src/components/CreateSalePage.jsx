@@ -136,8 +136,6 @@ const Layout = () => {
   const createSale = (event) => {
     event.preventDefault();
 
-    console.log(products);
-
     if (!validateProducts()) {
       return;
     }
@@ -219,7 +217,7 @@ const Layout = () => {
             </tr>
             <tr>
               <td>
-                <label htmlFor="discount">Desconto: </label>
+                <label htmlFor="discount">Desconto: R$ </label>
               </td>
               <td>
                 <input

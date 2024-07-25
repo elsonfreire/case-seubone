@@ -17,7 +17,6 @@ const RequestsPage = () => {
     }
 
     const approvedSale = requests.find((request) => {
-      console.log(request);
       return request.id === id;
     });
 
