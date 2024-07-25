@@ -127,7 +127,10 @@ const Layout = () => {
         `desconto ${sale.discount} grande demais. maximo = ${maxDiscount}`
       );
 
-      //
+      alert(
+        "Desconto excedeu o permitido. Solicitação de venda criada com sucesso."
+      );
+      return;
     }
 
     salesServices.create(sale);
@@ -136,6 +139,8 @@ const Layout = () => {
     setShipping("");
     setDelivery("default");
     setDiscount("");
+
+    alert("Venda criada com sucesso");
   };
 
   useEffect(() => {

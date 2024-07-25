@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import CreateSalePage from "./components/CreateSalePage";
 import ListSalesPage from "./components/ListSalesPage";

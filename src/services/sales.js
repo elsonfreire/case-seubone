@@ -33,17 +33,6 @@ const createService = (baseUrl) => {
   };
 };
 
-const calculateProductsSum = (products) => {
-  let productsSum = 0;
-
-  products.forEach((product) => {
-    const productPrice = productsService.getProductPriceBySku(product.sku);
-    productsSum += productPrice * Number(product.quantity);
-  });
-
-  return productsSum;
-};
-
 const salesServices = createService(salesUrl);
 const requestsServices = createService(requestsUrl);
 

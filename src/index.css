@@ -1,19 +1,20 @@
 * {
   box-sizing: border-box;
+  font-family: "Manrope", sans-serif;
 }
 
 body {
   margin: 0;
 }
 
-.sale-item {
+.item {
   border: solid 1px;
   padding: 30px;
   margin: 5px;
   width: 24%;
 }
 
-.sale-list {
+.item-list {
   display: flex;
   flex-wrap: wrap;
 }

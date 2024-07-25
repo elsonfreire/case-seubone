@@ -1,30 +1,60 @@
-import { useState } from "react";
-import SaleInfo from "./SaleInfo";
+import React, { useEffect, useState } from "react";
+import { salesServices, requestsServices } from "../services/sales";
+import ItemList from "../components/common/ItemList";
+import { calculateTotalPrice } from "../util/calculations";
 
-const RequestsList = () => {};
-
-const Layout = () => {
+const RequestsPage = () => {
   const [requests, setRequests] = useState([]);
 
-  const sale = {
-    id: "b32e",
-    products: [
-      {
-        sku: "TR.BD.PA.0A",
-        quantity: "300",
-      },
-    ],
-    shipping: "200",
-    delivery: "turbo",
-    discount: "50.50",
+  useEffect(() => {
+    requestsServices.getAll().then((response) => {
+      setRequests(response);
+    });
+  }, []);
+
+  const handleApproveRequest = (id) => {
+    if (!window.confirm(`Deseja mesmo aprovar a solicitação de ID ${id}?`)) {
+      return;
+    }
+
+    const approvedSale = requests.find((request) => {
+      return request.id === id;
+    });
+
+    console.log(
+      `Deveria ser aprovado request de valor ${calculateTotalPrice(
+        approvedSale
+      )}`
+    );
   };
+
+  const handleDeleteRequest = (id) => {
+    if (!window.confirm(`Deseja mesmo recusar a solicitação de ID ${id}?`)) {
+      return;
+    }
+
+    requestsServices.remove(id).then((response) => {
+      setRequests(requests.filter((request) => request.id !== response.id));
+    });
+  };
+
+  const actions = [
+    {
+      text: "Aprovar",
+      handler: handleApproveRequest,
+    },
+    {
+      text: "Recusar",
+      handler: handleDeleteRequest,
+    },
+  ];
 
   return (
     <>
-      <h1>Solicitações</h1>
-      <SaleInfo sale={sale}></SaleInfo>
+      <h1>Solicitações de venda</h1>
+      <ItemList items={requests} actions={actions} />
     </>
   );
 };
 
-export default Layout;
+export default RequestsPage;

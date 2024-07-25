@@ -1,39 +1,8 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { salesServices } from "../services/sales";
-import SaleInfo from "./SaleInfo";
+import ItemList from "../components/common/ItemList";
 
-const Sale = ({ sale, handleDeleteSale }) => {
-  return (
-    <div className="sale-item">
-      <SaleInfo sale={sale} />
-      <button onClick={handleDeleteSale}>Excluir venda</button>
-    </div>
-  );
-};
-
-const SalesList = ({ sales, handleDeleteSale }) => {
-  const getSales = () => {
-    return sales.map((sale) => {
-      return (
-        <Sale
-          key={sale.id}
-          sale={sale}
-          handleDeleteSale={() => {
-            handleDeleteSale(sale.id);
-          }}
-        />
-      );
-    });
-  };
-
-  return (
-    <div className="sale-list">
-      {sales.length > 0 ? getSales() : <p>Nenhum produto foi adicionado</p>}
-    </div>
-  );
-};
-
-const Layout = () => {
+const SalesPage = () => {
   const [sales, setSales] = useState([]);
 
   useEffect(() => {
@@ -43,25 +12,28 @@ const Layout = () => {
   }, []);
 
   const handleDeleteSale = (id) => {
-    if (!window.confirm(`Deseja mesmo excluir o pedido de ID ${id}?`)) {
+    if (!window.confirm(`Deseja mesmo excluir a venda de ID ${id}?`)) {
       return;
     }
 
     salesServices.remove(id).then((response) => {
-      setSales(
-        sales.filter((sale) => {
-          return sale.id !== response.id;
-        })
-      );
+      setSales(sales.filter((sale) => sale.id !== response.id));
     });
   };
 
+  const actions = [
+    {
+      text: "Excluir venda",
+      handler: handleDeleteSale,
+    },
+  ];
+
   return (
     <>
-      <h1>Vendas </h1>
-      <SalesList sales={sales} handleDeleteSale={handleDeleteSale} />
+      <h1>Vendas</h1>
+      <ItemList items={sales} actions={actions} />
     </>
   );
 };
 
-export default Layout;
+export default SalesPage;

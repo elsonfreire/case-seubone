@@ -1,4 +1,24 @@
 {
-  "sales": [],
-  "request": []
+  "sales": [
+    {
+      "id": "05bc",
+      "products": [
+        {
+          "sku": "TR.BD.PA.0A",
+          "quantity": "150"
+        }
+      ],
+      "shipping": "3000",
+      "delivery": "default",
+      "discount": "200"
+    },
+    {
+      "id": "e8e9",
+      "products": [],
+      "shipping": "13123",
+      "delivery": "turbo",
+      "discount": "13"
+    }
+  ],
+  "requests": []
 }
