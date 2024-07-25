@@ -19,6 +19,11 @@ const ProductsForm = ({ products, setProducts }) => {
       return;
     }
 
+    if (isNaN(newProductQuantity) || newProductQuantity <= 0) {
+      alert("Insira uma quantidade válida");
+      return;
+    }
+
     if (
       products &&
       products.some((product) => {
@@ -29,7 +34,10 @@ const ProductsForm = ({ products, setProducts }) => {
       return;
     }
 
-    const productObject = { sku: newProductSku, quantity: newProductQuantity };
+    const productObject = {
+      sku: newProductSku,
+      quantity: Number(newProductQuantity),
+    };
     setProducts(products.concat(productObject));
 
     setNewProductSku("");
@@ -57,61 +65,79 @@ const ProductsForm = ({ products, setProducts }) => {
   return (
     <>
       <form onSubmit={addProduct}>
+        <label htmlFor="sku">SKU: </label>
         <input
           value={newProductSku}
           onChange={handleProductSkuChange}
-          placeholder="SKU"
+          placeholder="TR.BD.PA.0A"
+          id="sku"
         />
         <p>{newProductDescription}</p>
+        <label htmlFor="quantity">Quantidade: </label>
         <input
+          type="number"
           value={newProductQuantity}
           onChange={handleProductQuantityChange}
           placeholder="Quantidade"
+          id="quantity"
         />
-        <button type="submit">Add</button>
+        <button type="submit">Adicionar</button>
       </form>
     </>
   );
 };
 
 const Products = ({ products }) => {
+  const productsListStyle = {
+    border: "solid 1px",
+    display: "inline-block",
+    padding: "10px",
+    margin: "10px",
+  };
+
   const getProductsListItems = () => {
     return products.map((product) => {
       return (
         <li key={product.sku}>
-          SKU: {product.sku} QTD: {product.quantity}
+          <strong>SKU: </strong> {product.sku} <strong>QTD: </strong>
+          {product.quantity}
         </li>
       );
     });
   };
 
   return (
-    <>
-      <ul>
+    <div style={productsListStyle}>
+      <ul style={{ padding: "5px 10px", marginLeft: "20px" }}>
         {products.length > 0 ? (
           getProductsListItems()
         ) : (
           <p>Nenhum produto foi adicionado</p>
         )}
       </ul>
-    </>
+    </div>
   );
 };
 
 const Layout = () => {
   const [products, setProducts] = useState([]);
-  const [shipping, setShipping] = useState("");
+  const [shipping, setShipping] = useState("ne");
   const [delivery, setDelivery] = useState("default");
   const [discount, setDiscount] = useState("");
-  const [saleValue, setSaleValue] = useState(0);
+  const [saleValue, setSaleValue] = useState("");
 
   const getSaleObject = () => {
     const sale = {
       products,
       shipping,
       delivery,
-      discount,
+      discount: Number(discount),
     };
+
+    if (isNaN(discount)) {
+      sale.discount = 0;
+    }
+
     return sale;
   };
 
@@ -143,15 +169,14 @@ const Layout = () => {
     const sale = getSaleObject();
 
     if (!validateDiscount()) {
-      requestsServices.create(sale).then((response) => {
-        console.log(response);
-      });
+      requestsServices.create(sale);
+      return;
     }
 
     salesServices.create(sale);
 
     setProducts([]);
-    setShipping("");
+    setShipping("ne");
     setDelivery("default");
     setDiscount("");
 
@@ -190,12 +215,17 @@ const Layout = () => {
                 <label htmlFor="shipping">Frete: </label>
               </td>
               <td>
-                <input
+                <select
                   value={shipping}
                   onChange={handleShippingChange}
                   id="shipping"
-                  required
-                />
+                >
+                  <option value="ne">Nordeste</option>
+                  <option value="n">Norte</option>
+                  <option value="co">Centro-Oeste</option>
+                  <option value="s">Sul</option>
+                  <option value="se">Sudeste</option>
+                </select>
               </td>
             </tr>
             <tr>
@@ -221,6 +251,7 @@ const Layout = () => {
               </td>
               <td>
                 <input
+                  type="number"
                   value={discount}
                   onChange={handleDiscountChange}
                   id="discount"

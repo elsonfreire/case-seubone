@@ -5,7 +5,7 @@ const calculateProductsSum = (products) => {
 
   products.forEach((product) => {
     const productPrice = productsService.getProductPriceBySku(product.sku);
-    productsSum += productPrice * Number(product.quantity);
+    productsSum += productPrice * product.quantity;
   });
 
   return productsSum;
@@ -22,7 +22,10 @@ const calculateMaxDiscount = (sale) => {
 
   const percentage = percentageMap[sale.delivery];
 
-  const maxDiscount = Math.max(sale.shipping, percentage * productsSum);
+  const maxDiscount = Math.max(
+    calculateShipping(sale),
+    percentage * productsSum
+  );
   return maxDiscount;
 };
 
@@ -39,14 +42,26 @@ const calculateTotalPrice = (sale) => {
 
   const total =
     productsSum +
-    Number(sale.shipping) +
+    calculateShipping(sale) +
     deliveryAdditional -
     Number(sale.discount);
 
   return total;
 };
 
-const calculateShipping = (region) => {
+const getQuantityOfProducts = (products) => {
+  let quantity = 0;
+
+  products.forEach((product) => {
+    quantity += product.quantity;
+  });
+
+  return quantity;
+};
+
+const calculateShipping = (sale) => {
+  const region = sale.shipping;
+
   const regionFactor = {
     n: 10,
     ne: 0,
@@ -55,9 +70,7 @@ const calculateShipping = (region) => {
     s: 30,
   };
 
-  const productsQuantity = 0;
-  //pegar  a qtdd
-  return regionFactor[region] * productsQuantity;
+  return regionFactor[region] * getQuantityOfProducts(sale.products);
 };
 
-export { calculateMaxDiscount, calculateTotalPrice };
+export { calculateMaxDiscount, calculateTotalPrice, calculateShipping };
