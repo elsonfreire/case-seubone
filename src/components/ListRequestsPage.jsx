@@ -11,6 +11,16 @@ const RequestsPage = () => {
     });
   }, []);
 
+  const deleteRequest = (id) => {
+    requestsServices.remove(id);
+
+    setRequests(
+      requests.filter((request) => {
+        return request.id !== id;
+      })
+    );
+  };
+
   const handleApproveRequest = (id) => {
     if (!window.confirm(`Deseja mesmo aprovar a solicitação de ID ${id}?`)) {
       return;
@@ -24,13 +34,7 @@ const RequestsPage = () => {
 
     salesServices.create(approvedSaleWithoutId);
 
-    requestsServices.remove(id);
-
-    setRequests(
-      requests.filter((request) => {
-        return request.id !== id;
-      })
-    );
+    deleteRequest(id);
   };
 
   const handleDeleteRequest = (id) => {
@@ -38,9 +42,7 @@ const RequestsPage = () => {
       return;
     }
 
-    requestsServices.remove(id).then((response) => {
-      setRequests(requests.filter((request) => request.id !== response.id));
-    });
+    deleteRequest(id);
   };
 
   const actions = [
