@@ -59,7 +59,7 @@ const RequestsPage = () => {
   return (
     <>
       <h1>Solicitações de venda</h1>
-      <ItemList items={requests} actions={actions} />
+      <ItemList items={requests} setItems={setRequests} actions={actions} />
     </>
   );
 };

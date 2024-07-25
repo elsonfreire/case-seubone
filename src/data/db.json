@@ -1,4 +1,53 @@
 {
-  "sales": [],
+  "sales": [
+    {
+      "id": "8f7b",
+      "products": [
+        {
+          "sku": "TR.BD.PR.6A",
+          "quantity": 301
+        }
+      ],
+      "shipping": "nordeste",
+      "delivery": "default",
+      "discount": 0
+    },
+    {
+      "id": "ff0a",
+      "products": [
+        {
+          "sku": "TR.BD.PR.6A",
+          "quantity": 300
+        }
+      ],
+      "shipping": "nordeste",
+      "delivery": "default",
+      "discount": 0
+    },
+    {
+      "id": "46fe",
+      "products": [
+        {
+          "sku": "TR.BD.PR.6A",
+          "quantity": 299
+        }
+      ],
+      "shipping": "nordeste",
+      "delivery": "default",
+      "discount": 0
+    },
+    {
+      "id": "14fd",
+      "products": [
+        {
+          "sku": "TR.BD.PR.6A",
+          "quantity": 150
+        }
+      ],
+      "shipping": "norte",
+      "delivery": "default",
+      "discount": 148
+    }
+  ],
   "requests": []
 }

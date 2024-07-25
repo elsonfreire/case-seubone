@@ -31,7 +31,7 @@ const SalesPage = () => {
   return (
     <>
       <h1>Vendas</h1>
-      <ItemList items={sales} actions={actions} />
+      <ItemList items={sales} setItems={setSales} actions={actions} />
     </>
   );
 };
