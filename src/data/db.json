@@ -47,6 +47,22 @@
       "shipping": "norte",
       "delivery": "default",
       "discount": 148
+    },
+    {
+      "id": "f36a",
+      "products": [
+        {
+          "sku": "TR.BD.PR.6A",
+          "quantity": 300
+        },
+        {
+          "sku": "TR.BD.PA.0A",
+          "quantity": 135
+        }
+      ],
+      "shipping": "norte",
+      "delivery": "turbo",
+      "discount": 1000
     }
   ],
   "requests": []

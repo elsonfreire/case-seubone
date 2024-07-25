@@ -1,13 +1,15 @@
 import React, { useEffect } from "react";
 import { calculateTotalPrice } from "../../util/calculations";
 import ItemFilter from "./ItemFilter";
+import { getProductBySku } from "../../services/products";
 
 const ItemInfo = ({ item }) => {
   const getProductsListItems = () => {
     return item.products.map((product) => {
       return (
         <li key={product.sku}>
-          SKU: {product.sku} QTD: {product.quantity}
+          <strong>{product.quantity}x </strong>
+          {getProductBySku(product.sku).produto}
         </li>
       );
     });

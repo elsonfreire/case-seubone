@@ -91,7 +91,7 @@ const SaleDetailsForm = ({ products, setProducts }) => {
         <tbody>
           <tr>
             <td>
-              <label htmlFor="shipping">Frete: </label>
+              <label htmlFor="shipping">Região destino: </label>
             </td>
             <td>
               <select
@@ -99,11 +99,11 @@ const SaleDetailsForm = ({ products, setProducts }) => {
                 onChange={handleShippingChange}
                 id="shipping"
               >
-                <option value="nordeste">Nordeste</option>
                 <option value="norte">Norte</option>
+                <option value="nordeste">Nordeste</option>
                 <option value="centrooeste">Centro-Oeste</option>
-                <option value="sul">Sul</option>
                 <option value="sudeste">Sudeste</option>
+                <option value="sul">Sul</option>
               </select>
             </td>
           </tr>
