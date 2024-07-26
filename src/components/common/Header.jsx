@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
 
 const Navbar = () => {
@@ -11,8 +11,12 @@ const Navbar = () => {
     margin: "0px",
   };
 
+  const navigate = useNavigate();
+
   const handleLogout = () => {
     localStorage.setItem("auth", "false");
+    alert("Você foi desconectado");
+    navigate("/");
   };
 
   const renderLoginButton = () => {
