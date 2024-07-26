@@ -11,6 +11,12 @@
       "name": "Joao",
       "password": "123",
       "role": "seller"
+    },
+    {
+      "id": "d888",
+      "name": "Guilherme",
+      "password": "123",
+      "role": "manager"
     }
   ],
   "sales": [

@@ -36,20 +36,53 @@ const Navbar = () => {
     );
   };
 
-  return (
-    <ul style={navbarStyle}>
-      <li>
-        <Link to="/create">Criar venda</Link>
-      </li>
-      <li>
-        <Link to="/sales">Vendas</Link>
-      </li>
-      <li>
-        <Link to="/requests">Solicitações</Link>
-      </li>
-      {renderLoginButton()}
-    </ul>
-  );
+  const renderNavbar = () => {
+    const auth = localStorage.getItem("auth");
+
+    if (auth === "seller") {
+      return (
+        <>
+          <li>
+            <Link to="/create">Criar venda</Link>
+          </li>
+          <li>
+            <Link to="/sales">Vendas</Link>
+          </li>
+          <li>
+            <button onClick={handleLogout}>Logout</button>
+          </li>
+        </>
+      );
+    } else if (auth === "manager") {
+      return (
+        <>
+          <li>
+            <Link to="/create">Criar venda</Link>
+          </li>
+          <li>
+            <Link to="/sales">Vendas</Link>
+          </li>
+          <li>
+            <Link to="/requests">Solicitações</Link>
+          </li>
+          <li>
+            <button onClick={handleLogout}>Logout</button>
+          </li>
+        </>
+      );
+    } else {
+      return (
+        <li>
+          <Link to="/login" style={{ marginRight: "15px" }}>
+            Login
+          </Link>
+          <Link to="/register">Cadastrar-se</Link>
+        </li>
+      );
+    }
+  };
+
+  return <ul style={navbarStyle}>{renderNavbar()}</ul>;
 };
 
 const Header = () => {
