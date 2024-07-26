@@ -21,8 +21,6 @@ const ItemFilter = ({ items, setItems }) => {
       });
     }
 
-    console.log(orderedItems);
-
     setItems(orderedItems);
   }, [order]);
 

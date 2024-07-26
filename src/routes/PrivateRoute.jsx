@@ -8,11 +8,11 @@ const PrivateRoute = ({ allowedRoles }) => {
 
   if (!isAuthorized) {
     alert(
-      "Você não pode acessar essa página. Redirecionando para página de Login."
+      "Você não tem permissão para acessar essa página. Redirecionando para página inicial."
     );
   }
 
-  return isAuthorized ? <Outlet /> : <Navigate to="/login" />;
+  return isAuthorized ? <Outlet /> : <Navigate to="/" />;
 };
 
 export default PrivateRoute;

@@ -11,6 +11,27 @@ const Navbar = () => {
     margin: "0px",
   };
 
+  const handleLogout = () => {
+    localStorage.setItem("auth", "false");
+  };
+
+  const renderLoginButton = () => {
+    const auth = localStorage.getItem("auth");
+
+    return auth === "false" ? (
+      <li>
+        <Link to="/login" style={{ marginRight: "15px" }}>
+          Login
+        </Link>
+        <Link to="/register">Cadastrar-se</Link>
+      </li>
+    ) : (
+      <li>
+        <button onClick={handleLogout}>Logout</button>
+      </li>
+    );
+  };
+
   return (
     <ul style={navbarStyle}>
       <li>
@@ -22,12 +43,7 @@ const Navbar = () => {
       <li>
         <Link to="/requests">Solicitações</Link>
       </li>
-      <li>
-        <Link to="/login" style={{ marginRight: "15px" }}>
-          Login
-        </Link>
-        <Link to="/register">Cadastrar-se</Link>
-      </li>
+      {renderLoginButton()}
     </ul>
   );
 };
@@ -51,10 +67,7 @@ const Header = () => {
     <>
       <header style={headerStyle}>
         <img src={logo} alt="Logo" style={logoStyle} />
-        <h1 style={{ color: "white" }}>
-          {" "}
-          - Sistema de gerenciamento de vendas
-        </h1>
+        <h1 style={{ color: "white" }}>- Sistema de gerenciamento de vendas</h1>
       </header>
       <Navbar />
     </>
