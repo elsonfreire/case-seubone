@@ -1,85 +1,12 @@
 {
-  "sales": [
+  "users": [
     {
-      "id": "8f7b",
-      "products": [
-        {
-          "sku": "TR.BD.PR.6A",
-          "quantity": 301
-        }
-      ],
-      "shipping": "nordeste",
-      "delivery": "default",
-      "discount": 0
-    },
-    {
-      "id": "ff0a",
-      "products": [
-        {
-          "sku": "TR.BD.PR.6A",
-          "quantity": 300
-        }
-      ],
-      "shipping": "nordeste",
-      "delivery": "default",
-      "discount": 0
-    },
-    {
-      "id": "46fe",
-      "products": [
-        {
-          "sku": "TR.BD.PR.6A",
-          "quantity": 299
-        }
-      ],
-      "shipping": "nordeste",
-      "delivery": "default",
-      "discount": 0
-    },
-    {
-      "id": "14fd",
-      "products": [
-        {
-          "sku": "TR.BD.PR.6A",
-          "quantity": 150
-        }
-      ],
-      "shipping": "norte",
-      "delivery": "default",
-      "discount": 148
-    },
-    {
-      "id": "f36a",
-      "products": [
-        {
-          "sku": "TR.BD.PR.6A",
-          "quantity": 300
-        },
-        {
-          "sku": "TR.BD.PA.0A",
-          "quantity": 135
-        }
-      ],
-      "shipping": "norte",
-      "delivery": "turbo",
-      "discount": 1000
-    },
-    {
-      "id": "c150",
-      "products": [
-        {
-          "sku": "TR.BD.PR.6A",
-          "quantity": 300
-        },
-        {
-          "sku": "TR.BD.PA.0A",
-          "quantity": 150
-        }
-      ],
-      "shipping": "centrooeste",
-      "delivery": "super",
-      "discount": 200
+      "id": "dac6",
+      "name": "Elson",
+      "password": "123",
+      "role": "seller"
     }
   ],
+  "sales": [],
   "requests": []
 }

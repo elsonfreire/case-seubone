@@ -23,7 +23,10 @@ const Navbar = () => {
         <Link to="/requests">Solicitações</Link>
       </li>
       <li>
-        <Link to="/login">Login</Link>
+        <Link to="/login" style={{ marginRight: "15px" }}>
+          Login
+        </Link>
+        <Link to="/register">Cadastrar-se</Link>
       </li>
     </ul>
   );

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { calculateTotalPrice } from "../../util/calculations";
 import ItemFilter from "./ItemFilter";
-import { getProductBySku } from "../../services/products";
+import { getProductBySku } from "../../services/productServices";
 
 const ItemInfo = ({ item }) => {
   const getProductsListItems = () => {

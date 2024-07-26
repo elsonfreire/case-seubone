@@ -3,7 +3,7 @@ import {
   calculateTotalPrice,
   calculateMaxDiscount,
 } from "../util/calculations";
-import { requestsServices, salesServices } from "../services/sales";
+import { requestsServices, salesServices } from "../services/dataServices";
 
 const SaleDetailsForm = ({ products, setProducts }) => {
   const [shipping, setShipping] = useState("nordeste");

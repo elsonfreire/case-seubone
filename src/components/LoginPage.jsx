@@ -1,6 +1,9 @@
 import { useState } from "react";
+import axios from "axios";
+import Form from "./common/UserForm";
+import { usersServices } from "../services/dataServices";
 
-const Form = () => {
+const LoginPage = () => {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
 
@@ -12,51 +15,39 @@ const Form = () => {
     setPassword(event.target.value);
   };
 
-  const handleLogin = () => {};
+  const handleLogin = async (event) => {
+    event.preventDefault();
+
+    usersServices
+      .getAll()
+      .then((response) => {
+        const foundUser = response.find((user) => {
+          return user.name === name && user.password === password;
+        });
+
+        if (!foundUser) {
+          alert("Credenciais incorretas");
+          return;
+        }
+
+        alert("Login realizado com sucesso");
+      })
+      .catch(console.log("Ocorreu um erro ao realizar login"));
+  };
 
   return (
-    <form onSubmit={handleLogin}>
-      <table>
-        <tbody>
-          <tr>
-            <td>
-              <label htmlFor="name">Nome: </label>
-            </td>
-            <td>
-              <input value={name} onChange={handleNameChange} id="name" />
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <label htmlFor="password">Senha: </label>
-            </td>
-            <td>
-              <input
-                type="password"
-                value={password}
-                onChange={handlePasswordChange}
-                id="password"
-              />
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <button type="submit">Login</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </form>
-  );
-};
-
-const Layout = () => {
-  return (
-    <>
+    <div>
       <h1>Login</h1>
-      <Form />
-    </>
+      <Form
+        name={name}
+        handleNameChange={handleNameChange}
+        password={password}
+        handlePasswordChange={handlePasswordChange}
+        handleSubmit={handleLogin}
+        submitText="Login"
+      />
+    </div>
   );
 };
 
-export default Layout;
+export default LoginPage;

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { salesServices } from "../services/sales";
+import { salesServices } from "../services/dataServices";
 import ItemList from "../components/common/ItemList";
 
-const Layout = () => {
+const ListSalesPage = () => {
   const [sales, setSales] = useState([]);
 
   useEffect(() => {
@@ -36,4 +36,4 @@ const Layout = () => {
   );
 };
 
-export default Layout;
+export default ListSalesPage;

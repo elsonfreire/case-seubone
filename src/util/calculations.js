@@ -1,4 +1,4 @@
-import productsService from "../services/products";
+import productsService from "../services/productServices";
 
 const calculateProductsSum = (products) => {
   let productsSum = 0;
