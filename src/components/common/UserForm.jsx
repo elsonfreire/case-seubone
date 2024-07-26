@@ -17,7 +17,12 @@ const UserForm = ({
                 <label htmlFor="name">Nome: </label>
               </td>
               <td>
-                <input value={name} onChange={handleNameChange} id="name" />
+                <input
+                  value={name}
+                  onChange={handleNameChange}
+                  id="name"
+                  required
+                />
               </td>
             </tr>
             <tr>
@@ -30,6 +35,7 @@ const UserForm = ({
                   value={password}
                   onChange={handlePasswordChange}
                   id="password"
+                  required
                 />
               </td>
             </tr>

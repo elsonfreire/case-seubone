@@ -1,12 +1,31 @@
 {
   "users": [
     {
-      "id": "dac6",
+      "id": "e7ef",
       "name": "Elson",
+      "password": "123",
+      "role": "manager"
+    },
+    {
+      "id": "2af7",
+      "name": "Joao",
       "password": "123",
       "role": "seller"
     }
   ],
-  "sales": [],
+  "sales": [
+    {
+      "id": "21d5",
+      "products": [
+        {
+          "sku": "TR.BD.PR.6A",
+          "quantity": 123
+        }
+      ],
+      "shipping": "nordeste",
+      "delivery": "default",
+      "discount": 200
+    }
+  ],
   "requests": []
 }

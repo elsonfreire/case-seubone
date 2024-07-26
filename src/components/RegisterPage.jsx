@@ -2,8 +2,10 @@ import { useState } from "react";
 import axios from "axios";
 import UserForm from "./common/UserForm";
 import { usersServices } from "../services/dataServices";
+import { useNavigate } from "react-router-dom";
 
 const RegisterPage = () => {
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("seller");
@@ -28,8 +30,14 @@ const RegisterPage = () => {
       password,
       role,
     };
+
     usersServices
       .create(user)
+      .then(() => {
+        localStorage.setItem("auth", user.role);
+        alert("Usuário cadastrado com sucesso");
+        navigate("/create");
+      })
       .catch(console.log("Ocorreu um erro ao cadastrar usuário"));
   };
 

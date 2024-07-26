@@ -1,9 +1,10 @@
 import { useState } from "react";
-import axios from "axios";
 import Form from "./common/UserForm";
 import { usersServices } from "../services/dataServices";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
 
@@ -30,9 +31,15 @@ const LoginPage = () => {
           return;
         }
 
+        localStorage.setItem("auth", foundUser.role);
+
         alert("Login realizado com sucesso");
+
+        navigate("/create");
       })
-      .catch(console.log("Ocorreu um erro ao realizar login"));
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   return (
