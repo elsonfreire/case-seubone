@@ -67,7 +67,7 @@ const calculateShipping = (sale) => {
     nordeste: 0,
     centrooeste: 15,
     sudeste: 20,
-    s: 30,
+    sul: 30,
   };
 
   return regionFactor[region] * getQuantityOfProducts(sale.products);

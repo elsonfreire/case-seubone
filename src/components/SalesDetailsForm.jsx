@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import {
   calculateTotalPrice,
   calculateMaxDiscount,
+  calculateShipping,
 } from "../util/calculations";
 import { requestsServices, salesServices } from "../services/dataServices";
 
@@ -39,6 +40,10 @@ const SaleDetailsForm = ({ products, setProducts }) => {
     const maxDiscount = calculateMaxDiscount(sale);
     if (sale.discount > maxDiscount) {
       alert("Desconto excedeu o permitido. Solicitação de venda foi enviada");
+      setProducts([]);
+      setShipping("nordeste");
+      setDelivery("default");
+      setDiscount("");
       return false;
     }
     return true;
@@ -106,6 +111,7 @@ const SaleDetailsForm = ({ products, setProducts }) => {
                 <option value="sul">Sul</option>
               </select>
             </td>
+            <td>+R$ {calculateShipping(getSaleObject()).toFixed(2)}</td>
           </tr>
           <tr>
             <td>
@@ -140,7 +146,7 @@ const SaleDetailsForm = ({ products, setProducts }) => {
           </tr>
         </tbody>
       </table>
-      <h3>Valor total: R$ {saleValue}</h3>
+      <h3>Valor total: R$ {Number(saleValue).toFixed(2)}</h3>
       <button type="submit">Criar venda</button>
     </form>
   );
