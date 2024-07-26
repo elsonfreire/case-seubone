@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { salesServices, requestsServices } from "../services/sales";
+import { salesServices, requestsServices } from "../services/dataServices";
 import ItemList from "../components/common/ItemList";
 
-const RequestsPage = () => {
+const ListRequestsPage = () => {
   const [requests, setRequests] = useState([]);
 
   useEffect(() => {
@@ -59,9 +59,9 @@ const RequestsPage = () => {
   return (
     <>
       <h1>Solicitações de venda</h1>
-      <ItemList items={requests} actions={actions} />
+      <ItemList items={requests} setItems={setRequests} actions={actions} />
     </>
   );
 };
 
-export default RequestsPage;
+export default ListRequestsPage;

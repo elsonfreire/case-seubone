@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import productsService from "../services/products";
+import productsService from "../services/productServices";
 
 const ProductsForm = ({ products, setProducts }) => {
   const [newProductSku, setNewProductSku] = useState("");

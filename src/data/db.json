@@ -1,4 +1,12 @@
 {
+  "users": [
+    {
+      "id": "dac6",
+      "name": "Elson",
+      "password": "123",
+      "role": "seller"
+    }
+  ],
   "sales": [],
   "requests": []
 }

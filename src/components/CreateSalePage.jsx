@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
-import productsService from "../services/products";
 import SaleDetailsForm from "./SalesDetailsForm";
 import Products from "./Products";
 import ProductsForm from "./ProductsForm";
 
-const Layout = () => {
+const CreateSalePage = () => {
   const [products, setProducts] = useState([]);
 
   return (
@@ -19,4 +18,4 @@ const Layout = () => {
   );
 };
 
-export default Layout;
+export default CreateSalePage;

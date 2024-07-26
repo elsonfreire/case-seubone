@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { calculateTotalPrice } from "../../util/calculations";
+import ItemFilter from "./ItemFilter";
+import { getProductBySku } from "../../services/productServices";
 
 const ItemInfo = ({ item }) => {
   const getProductsListItems = () => {
     return item.products.map((product) => {
       return (
         <li key={product.sku}>
-          SKU: {product.sku} QTD: {product.quantity}
+          <strong>{product.quantity}x </strong>
+          {getProductBySku(product.sku).produto}
         </li>
       );
     });
@@ -23,7 +26,7 @@ const ItemInfo = ({ item }) => {
         <li>Prazo: {item.delivery}</li>
         <li>Desconto: {item.discount}</li>
       </ul>
-      <h3>Valor total: R$ {calculateTotalPrice(item)}</h3>
+      <h3>Valor total: R$ {calculateTotalPrice(item).toFixed(2)}</h3>
     </div>
   );
 };
@@ -41,17 +44,26 @@ const Item = ({ item, actions }) => {
   );
 };
 
-const ItemList = ({ items, actions }) => {
+const ItemList = ({ items, setItems, actions }) => {
   const renderItems = () => {
     return items.map((item) => (
       <Item key={item.id} item={item} actions={actions} />
     ));
   };
 
+  let renderedItems = renderItems();
+
+  useEffect(() => {
+    renderedItems = renderItems();
+  }, [items]);
+
   return (
-    <div className="item-list">
-      {items.length > 0 ? renderItems() : <p>Nenhum item encontrado</p>}
-    </div>
+    <>
+      <ItemFilter items={items} setItems={setItems} />
+      <div className="item-list">
+        {items.length > 0 ? renderedItems : <p>Nenhum item encontrado</p>}
+      </div>
+    </>
   );
 };
 
