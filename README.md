@@ -5,6 +5,7 @@ Desenvolvi esse programa sozinho em apenas 2 dias para um desafio de um processo
 *Tecnologias utilizadas:* React.js + HTML, CSS, Javascript, JSON server, Vite.
 
 *Screenshots:*
+
 Sistema de login e cadastro:
 ![Screenshot 2024-07-31 085351](https://github.com/user-attachments/assets/2f579b2b-da55-4ea0-83d5-ae514a823c7c)
 ![Screenshot 2024-07-31 085759](https://github.com/user-attachments/assets/73a49b91-dde0-4ac6-8210-c83da8d4ff47)
