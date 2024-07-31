@@ -1,1 +1,7 @@
 # Sistema de gerenciamento de vendas
+
+Desenvolvi esse programa sozinho em apenas 2 dias para um desafio de um processo seletivo que participei. Quando recebi a proposta do desafio, eu não possuía conhecimento algum de React.js, então, durante os 3 primeiros dias, realizei alguns capítulos de um curso de React.js que foram suficientes para completar a parte essencial do desafio.
+
+![Screenshot 2024-07-31 085351](https://github.com/user-attachments/assets/2f579b2b-da55-4ea0-83d5-ae514a823c7c)
+![Screenshot 2024-07-31 085535](https://github.com/user-attachments/assets/bae41eb7-c6dd-4ac7-b812-46ed2d50291b)
+![Screenshot 2024-07-31 085430](https://github.com/user-attachments/assets/489591a2-4998-4699-99ed-24b5194d0fba)
