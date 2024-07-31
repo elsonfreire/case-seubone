@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/a2f88d22-7977-444e-9867-670f175fe41e)# Sistema de gerenciamento de vendas
+# Sistema de gerenciamento de vendas
 
 Desenvolvi esse programa sozinho em apenas 2 dias para um desafio de um processo seletivo que participei. Quando recebi a proposta do desafio, eu não possuía conhecimento algum de React.js, então, durante os 3 primeiros dias, realizei alguns capítulos de um curso de React.js que foram suficientes para completar a parte essencial do desafio.
 
