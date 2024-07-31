@@ -38,10 +38,10 @@ const App = () => {
             <Route path="/requests" element={<ListRequestPage />} />
           </Route>
 
-          <Route element={<PrivateRoute allowedRoles={["false"]} />}>
+          <Route element={<PrivateRoute allowedRoles={[null, "false"]} />}>
             <Route path="/login" element={<LoginPage />} />
           </Route>
-          <Route element={<PrivateRoute allowedRoles={["false"]} />}>
+          <Route element={<PrivateRoute allowedRoles={[null, "false"]} />}>
             <Route path="/register" element={<RegisterPage />} />
           </Route>
         </Routes>

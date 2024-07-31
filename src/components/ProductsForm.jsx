@@ -58,7 +58,7 @@ const ProductsForm = ({ products, setProducts }) => {
       <input
         value={newProductSku}
         onChange={handleProductSkuChange}
-        placeholder="TR.BD.PA.0A"
+        placeholder="ABC.01"
         id="sku"
       />
       <p>{newProductDescription}</p>

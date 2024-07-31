@@ -1,84 +1,12 @@
 {
   "users": [
     {
-      "id": "31da",
-      "name": "seller",
+      "id": "d959",
+      "name": "elson",
       "password": "123",
       "role": "seller"
-    },
-    {
-      "id": "1689",
-      "name": "manager",
-      "password": "123",
-      "role": "manager"
     }
   ],
-  "sales": [
-    {
-      "id": "0a50",
-      "products": [
-        {
-          "sku": "TR.BD.PR.6A",
-          "quantity": 300
-        }
-      ],
-      "shipping": "norte",
-      "delivery": "turbo",
-      "discount": 2000
-    },
-    {
-      "id": "0459",
-      "products": [
-        {
-          "sku": "BM.DH.AS.SPR.8A.SP",
-          "quantity": 150
-        },
-        {
-          "sku": "BM.DH.AL.PRE.0A",
-          "quantity": 50
-        }
-      ],
-      "shipping": "nordeste",
-      "delivery": "default",
-      "discount": 300
-    },
-    {
-      "id": "4c1a",
-      "products": [
-        {
-          "sku": "VI.AL.PA.1A",
-          "quantity": 35
-        }
-      ],
-      "shipping": "centrooeste",
-      "delivery": "turbo",
-      "discount": 200
-    }
-  ],
-  "requests": [
-    {
-      "id": "e07c",
-      "products": [
-        {
-          "sku": "BD.BD.PA.8A",
-          "quantity": 100
-        }
-      ],
-      "shipping": "norte",
-      "delivery": "super",
-      "discount": 2000
-    },
-    {
-      "id": "da28",
-      "products": [
-        {
-          "sku": "TR.BD.PR.6A",
-          "quantity": 100
-        }
-      ],
-      "shipping": "norte",
-      "delivery": "default",
-      "discount": 3000
-    }
-  ]
+  "sales": [],
+  "requests": []
 }
